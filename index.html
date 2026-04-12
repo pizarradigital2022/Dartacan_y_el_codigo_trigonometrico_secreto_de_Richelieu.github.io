@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>D'Artacán y el código trigonométrico secreto de Richelieu</title>
+
+<script>
+window.MathJax = {
+  tex: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+body{
+    margin:0;
+    font-family:'Georgia', serif;
+    background: url('https://www.transparenttextures.com/patterns/dark-stone.png'), #1a1a2e;
+    color:#f5e6c8;
+    text-align:center;
+}
+
+.pergamino{
+    background:#fdf5e6;
+    color:#3b2f2f;
+    border:4px solid #c2a66b;
+    border-radius:15px;
+    padding:20px;
+    margin:20px auto;
+    max-width:700px;
+}
+
+.screen{display:none;}
+.active{display:block;}
+
+button{
+    background:#8b0000;
+    color:white;
+    padding:10px;
+    margin:10px;
+    border-radius:8px;
+}
+
+.hint{display:none; color:#8b0000;}
+
+.timer{
+position:fixed;
+top:10px;
+right:20px;
+background:black;
+color:gold;
+padding:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="timer" id="timer">Tiempo: --:--</div>
+
+<!-- INTRO -->
+<div id="intro" class="screen active pergamino">
+<h1>⚔️ El código secreto de Richelieu ⚔️</h1>
+
+<p>
+El cardenal ha escondido un mensaje que amenaza el reino.
+Solo resolviendo los enigmas podréis salvar Francia.
+</p>
+
+<button onclick="startGame(60)">60 min</button>
+<button onclick="startGame(90)">90 min</button>
+</div>
+
+<!-- PRUEBA TEMPLATE EJEMPLO -->
+<div id="test1" class="screen pergamino">
+<h2>🗡️ Prueba 1</h2>
+<p>Athos os entrega un mapa secreto...</p>
+
+<div class="math">\[ \sqrt{12^2 + 8^2} \]</div>
+
+<input id="q1">
+<br>
+
+<button onclick="check(1,14,'test2')">Validar</button>
+
+<button onclick="hint('h1',10)">Pista (-10s)</button>
+<div id="h1" class="hint">Aplica Pitágoras</div>
+</div>
+
+<!-- PRUEBA 2 -->
+<div id="test2" class="screen pergamino">
+<h2>🏹 Prueba 2</h2>
+
+<div class="math">\[ \sin(x)=0.6 \]</div>
+
+<input id="q2">
+<button onclick="check(2,9,'test3')">Validar</button>
+</div>
+
+<!-- PRUEBA 3 -->
+<div id="test3" class="screen pergamino">
+<h2>🏰 Prueba 3</h2>
+
+<div class="math">\[ 10 \cdot \tan(45°) \]</div>
+
+<input id="q3">
+<button onclick="check(3,18,'test4')">Validar</button>
+</div>
+
+<!-- PRUEBA 4 -->
+<div id="test4" class="screen pergamino">
+<h2>🐎 Prueba 4</h2>
+
+<div class="math">\[ \cos(60°)=x/13 \]</div>
+
+<input id="q4">
+<button onclick="check(4,6,'test5')">Validar</button>
+</div>
+
+<!-- PRUEBA 5 -->
+<div id="test5" class="screen pergamino">
+<h2>⚔️ Prueba 5</h2>
+
+<div class="math">\[ \sec(x) \text{ si } \cos(x)=1/2 \]</div>
+
+<input id="q5">
+<button onclick="check(5,4,'test6')">Validar</button>
+</div>
+
+<!-- PRUEBA 6 -->
+<div id="test6" class="screen pergamino">
+<h2>🏰 Prueba 6</h2>
+
+<div class="math">\[ \sin(x)=5/13 \]</div>
+
+<input id="q6">
+<button onclick="check(6,11,'test7')">Validar</button>
+</div>
+
+<!-- PRUEBA 7 -->
+<div id="test7" class="screen pergamino">
+<h2>📜 Prueba 7</h2>
+
+<div class="math">\[ c^2 = 5^2 + 7^2 - 2·5·7·\cos60° \]</div>
+
+<input id="q7">
+<button onclick="check(7,7,'test8')">Validar</button>
+</div>
+
+<!-- PRUEBA 8 -->
+<div id="test8" class="screen pergamino">
+<h2>🧭 Prueba 8</h2>
+
+<div class="math">\[ x/9 = 10/6 \]</div>
+
+<input id="q8">
+<button onclick="check(8,15,'test9')">Validar</button>
+</div>
+
+<!-- PRUEBA 9 -->
+<div id="test9" class="screen pergamino">
+<h2>🕵️ Prueba 9</h2>
+
+<div class="math">\[ \sin(x)=5/13 \]</div>
+
+<input id="q9">
+<button onclick="check(9,5,'test10')">Validar</button>
+</div>
+
+<!-- PRUEBA 10 -->
+<div id="test10" class="screen pergamino">
+<h2>🔐 Prueba 10</h2>
+
+<p>Lado mayor de triángulo 3:4:5 con perímetro 30</p>
+
+<input id="q10">
+<button onclick="check(10,12,'lock')">Validar</button>
+</div>
+
+<!-- CANDADO -->
+<div id="lock" class="screen pergamino">
+<h1>🔐 Candado final</h1>
+
+<input id="final">
+
+<button onclick="finalCheck()">Abrir</button>
+</div>
+
+<!-- ÉXITO -->
+<div id="success" class="screen pergamino">
+<h1>🎉 ¡Victoria! 🎉</h1>
+<p>¡Habéis salvado el reino!</p>
+</div>
+
+<!-- FRACASO -->
+<div id="fail" class="screen pergamino">
+<h1>💀 Derrota 💀</h1>
+<button onclick="restart()">Reintentar</button>
+</div>
+
+<script>
+let timeLeft, timerInterval;
+
+function startGame(m){
+ timeLeft=m*60;
+ show('test1');
+ timerInterval=setInterval(()=>{
+  timeLeft--;
+  let min=Math.floor(timeLeft/60);
+  let sec=timeLeft%60;
+  document.getElementById("timer").innerText=`Tiempo: ${min}:${sec}`;
+  if(timeLeft<=0) show('fail');
+ },1000);
+}
+
+function show(id){
+ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+}
+
+function check(n,correct,next){
+ let val=document.getElementById("q"+n).value;
+ if(Number(val)===correct){
+   show(next);
+ }else{
+   alert("Incorrecto");
+ }
+}
+
+function hint(id,penalty){
+ document.getElementById(id).style.display="block";
+ timeLeft-=penalty;
+}
+
+function finalCheck(){
+ if(document.getElementById("final").value==="149186411715512"){
+   show('success');
+ }else show('fail');
+}
+
+function restart(){ location.reload(); }
+</script>
+
+</body>
+</html>
