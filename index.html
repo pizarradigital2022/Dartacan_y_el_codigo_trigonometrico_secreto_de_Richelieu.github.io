@@ -417,6 +417,15 @@ function finalCheck(){
 }
 
 function restart(){ location.reload(); }
+
+document.getElementById("accesoProfe").addEventListener("input", function() {
+  if (this.value === "MOSQUETEROS") {
+    document.getElementById("panelProfesor").style.display = "block";
+  } else {
+    document.getElementById("panelProfesor").style.display = "none";
+  }
+});
+
 </script>
 
 </body>
