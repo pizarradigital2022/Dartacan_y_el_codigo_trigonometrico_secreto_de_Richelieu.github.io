@@ -205,10 +205,10 @@ Francia está en peligro.
 </p>
    <img src="./resources/prueba_5.png" alt="Athos en la prueba 5" width="400" class="imagen-pergamino"><br>
 
-<div class="math">\[ \sec(x) \text{ si } \cos(x)=1/2 \]</div>
+<div class="math">\[ \sec(x) \text{ si } \sen(x)=\sqrt(3)/2 \]</div>
 
 <input id="q5">
-<button onclick="check(5,4,'test6')">Validar</button>
+<button onclick="check(5,2,'test6')">Validar</button>
 </div>
 
 <!-- PRUEBA 6 -->
@@ -251,7 +251,7 @@ Francia está en peligro.
 
 </p>
 
-<div class="math">\[ c^2 = 5^2 + 7^2 - 2·5·7·\cos60° \]</div>
+<p>Aplica el Teorema del Coseno.</p>
 <p>Trunca el resultado.</p>
 
 <input id="q7">
@@ -441,7 +441,7 @@ function hint(id,penalty){
 }
 
 function finalCheck(){
- if(document.getElementById("final").value==="149126411715512"){
+ if(document.getElementById("final").value==="1491264128151312"){
    show('success');
  }else show('fail');
 }
