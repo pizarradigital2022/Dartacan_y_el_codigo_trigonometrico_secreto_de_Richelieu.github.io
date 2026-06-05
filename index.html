@@ -463,7 +463,7 @@ function finalCheck(){
 function restart(){ location.reload(); }
 
 document.getElementById("accesoProfe").addEventListener("input", function() {
-  if (this.value === "MOSQUETEROS") {
+  if (this.value === "MOSQUETEROS" || this.value === "PROFE") {
     document.getElementById("panelProfesor").style.display = "block";
   } else {
     document.getElementById("panelProfesor").style.display = "none";
